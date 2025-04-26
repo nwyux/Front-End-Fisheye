@@ -1,17 +1,65 @@
 function photographerTemplate(data) {
-    const { name, portrait } = data;
+    const { id, name, portrait, city, country, tagline, price } = data;
 
     const picture = `assets/photographers/${portrait}`;
 
+    // Au lieu de tout mettre dans une fonction, tout separe pour que ce soit clean
+
     function getUserCardDOM() {
-        const article = document.createElement( 'article' );
-        const img = document.createElement( 'img' );
-        img.setAttribute("src", picture)
-        const h2 = document.createElement( 'h2' );
+        const article = document.createElement('article');
+        article.classList.add('photographer-card');
+        article.setAttribute("aria-label", "Photographe " + name);
+        article.setAttribute("role", "article");
+        
+        const link = document.createElement('a');
+        link.setAttribute("href", `photographer.html?id=${id}`);
+        link.setAttribute("aria-label", `Voir le profil de ${name}`);
+        
+        const imgContainer = document.createElement('div');
+        imgContainer.classList.add('photographer-img-container');
+        
+        const img = document.createElement('img');
+        img.setAttribute("src", picture);
+        img.setAttribute("alt", name);
+        img.setAttribute("aria-label", "Photographe " + name);
+        img.setAttribute("role", "img");
+        
+        const h2 = document.createElement('h2');
         h2.textContent = name;
-        article.appendChild(img);
-        article.appendChild(h2);
+        h2.classList.add('photographer-name');
+        
+        const h3 = document.createElement('h3');
+        h3.textContent = `${city}, ${country}`;
+        h3.classList.add('photographer-location');
+        
+        const p = document.createElement('p');
+        p.textContent = tagline;
+        p.classList.add('photographer-tagline');
+        
+        const span = document.createElement('span');
+        span.textContent = `${price}€/jour`;
+        span.classList.add('photographer-price');
+        
+        imgContainer.appendChild(img);
+        
+        article.appendChild(link);
+        link.appendChild(imgContainer);
+        link.appendChild(h2);
+        article.appendChild(h3);
+        article.appendChild(p);
+        article.appendChild(span);
+        
         return (article);
     }
-    return { name, picture, getUserCardDOM }
+    
+    return { 
+        id, 
+        name, 
+        picture, 
+        city,
+        country,
+        tagline,
+        price,
+        getUserCardDOM 
+    }
 }
