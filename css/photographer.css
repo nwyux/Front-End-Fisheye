@@ -1,76 +1,386 @@
 #contact_modal {
-    display: none;
+  display: none;
 }
 
 .photograph-header {
-    background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
+  background-color: #fafafa;
+  height: 300px;
+  margin: 0 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.photographer-profile {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.photographer-profile h1 {
+  color: #d3573c;
+  margin-bottom: 5px;
+  text-align: center;
+  margin: 0;
+}
+
+.photographer-info-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.photographer-location {
+  color: #901c1c;
+  margin: 0;
+  font-size: 18px;
+  text-align: left;
+}
+
+.photographer-tagline {
+  color: #525252;
+  margin-top: 5px;
+  font-size: 16px;
+  text-align: left;
+}
+
+.contact-button-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .contact_button {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    padding: 11px;
-    width: 170px;
-    height: 70px;
-    border: none;
-    background-color: #901C1C;
-    border-radius: 5px;
-    cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 11px;
+  width: 170px;
+  height: 70px;
+  border: none;
+  background-color: #901c1c;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.photographer-portrait {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.photographer-portrait img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.sort-container {
+  display: flex;
+  align-items: center;
+  margin: 40px 100px 0;
+  gap: 15px;
+}
+
+.sort-label {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.sort-select {
+  background-color: #901c1c;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  appearance: none; /* Supprime l'apparence native du select */
+  position: relative;
+  min-width: 150px;
+  height: 50px;
+}
+
+/* Création de la flèche personnalisée */
+.sort-select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 24px;
+  padding-right: 35px;
+}
+
+/* Styles pour la galerie de médias */
+.media-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin: 50px 100px;
+}
+
+.media-card {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.media-container {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.media-content {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.media-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  color: #901c1c;
+}
+
+.media-title {
+  font-size: 14px;
+  margin: 0;
+  color: #901c1c;
+}
+
+.likes-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.likes-count {
+  font-weight: bold;
+}
+
+.fa-heart {
+  color: #901c1c;
+  cursor: pointer;
+}
+
+/* Barre de prix en bas de page */
+.photographer-price-banner {
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  background-color: #db8876;
+  padding: 15px 30px;
+  border-radius: 5px 5px 0 0;
+  font-weight: bold;
+  font-size: 18px;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles pour la modal de lightbox */
+.lightbox-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-content {
+  position: relative;
+  width: 95%;
+  max-width: 1400px;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrage horizontal */
+  outline: none; /* Enlève le cadre de focus par défaut */
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 35px; /* Légèrement agrandi */
+  color: #901c1c;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1010;
+}
+
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 35px; /* Légèrement agrandi */
+  color: #901c1c;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 15px;
+  z-index: 1010;
+}
+
+.lightbox-prev {
+  left: 15px;
+}
+
+.lightbox-next {
+  right: 15px;
+}
+
+.lightbox-media-container {
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
+  width: 100%;
+  height: 90%; /* Réduction légère pour laisser de la place au titre */
+}
+
+.lightbox-media {
+  width: 100%; /* Taille fixe à 70% de la largeur du conteneur */
+  height: 100%; /* Maintient le ratio */
+  object-fit: contain; /* Préserve le ratio sans déformation */
+}
+
+.lightbox-media-title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+}
+
+.lightbox-title {
+  color: #901c1c;
+  font-size: 20px;
+  text-align: left;
+  margin-top: 20px; /* Plus d'espace entre le média et le titre */
+  align-self: flex-start;
+  padding-left: 15%; /* Aligne le titre avec le bord gauche du média */
 }
 
 .modal {
-    border-radius: 5px;
-    background-color: #DB8876;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 35px;
-    margin: auto;
+  border-radius: 5px;
+  background-color: #db8876;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 35px;
+  margin: auto;
 }
 
 .modal header {
-    justify-content: space-between;
-    width: 100%;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Styles pour la modal de contact */
+#contact_modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background-color: #db8876;
+  width: 500px;
+  max-width: 90%;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.modal header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .modal header img {
-    cursor: pointer;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
 }
 
-.modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
+.modal h2 {
+  color: black;
+  font-size: 56px;
+  font-weight: normal;
+  margin: 0;
 }
 
 form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-form label {
-    color: #312E2E;
-    font-size: 36px;
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  color: #312e2e;
+  font-size: 21px;
+  margin-bottom: 5px;
 }
 
 form div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: self-start;
+  margin-bottom: 26px;
 }
 
-form input {
-    width: 100%;
-    height: 68px;
-    border: none;
-    border-radius: 5px;
+.form-group input,
+.form-group textarea {
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 16px;
+  height: 40px;
+  width: 100%;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+  width: 100%;
+}
+
+.modal .contact_button {
+  font-size: 18px;
+  padding: 11px 15px;
+  margin-top: 10px;
+  align-self: flex-start;
 }

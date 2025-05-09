@@ -27,6 +27,12 @@ function photographerTemplate(data) {
         const h2 = document.createElement('h2');
         h2.textContent = name;
         h2.classList.add('photographer-name');
+        h2.setAttribute("alt", `${name}`);
+
+        const infoContainer = document.createElement('div');
+        infoContainer.classList.add('photographer-info-container');
+        infoContainer.setAttribute("tabindex", "0");
+        infoContainer.setAttribute("aria-label", `Informations sur ${name}: ${city}, ${country}. ${tagline}. Tarif: ${price}€ par jour`);
         
         const h3 = document.createElement('h3');
         h3.textContent = `${city}, ${country}`;
@@ -40,14 +46,17 @@ function photographerTemplate(data) {
         span.textContent = `${price}€/jour`;
         span.classList.add('photographer-price');
         
+        // Ajout des éléments d'information au conteneur
+        infoContainer.appendChild(h3);
+        infoContainer.appendChild(p);
+        infoContainer.appendChild(span);
+        
         imgContainer.appendChild(img);
         
         article.appendChild(link);
         link.appendChild(imgContainer);
         link.appendChild(h2);
-        article.appendChild(h3);
-        article.appendChild(p);
-        article.appendChild(span);
+        article.appendChild(infoContainer); // Ajout du conteneur unique au lieu des éléments individuels
         
         return (article);
     }
