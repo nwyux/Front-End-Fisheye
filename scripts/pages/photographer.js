@@ -1,6 +1,3 @@
-//Mettre le code JavaScript lié à la page photographer.html
-
-// Fonction pour récupérer l'ID du photographe depuis l'URL
 function getPhotographerId() {
   const params = new URLSearchParams(window.location.search);
   return parseInt(params.get("id"));
@@ -83,10 +80,9 @@ function mediaFactory(data, photographerName) {
   return { getMediaCardDOM };
 }
 
-// Fonction pour récupérer les données depuis le fichier JSON
 async function fetchData() {
   try {
-    const response = await fetch("/data/photographers.json");
+    const response = await fetch("./data/photographers.json");
     const data = await response.json();
     return data;
   } catch (error) {
@@ -94,9 +90,7 @@ async function fetchData() {
   }
 }
 
-// Fonction pour initialiser la page du photographe
 async function init() {
-    // Récupération des données
     const { photographers, media } = await fetchData();
     const photographerId = getPhotographerId();
   
@@ -113,24 +107,18 @@ async function init() {
       (m) => m.photographerId === photographerId
     );
   
-    // Affichage des informations du photographe
     displayPhotographerInfo(photographer);
   
-    // Affichage des médias du photographe
     displayPhotographerMedia(photographerMedia, photographer.name);
   
-    // Affichage du tarif journalier
     displayPhotographerPrice(photographer.price);
     
-    // Initialisation du formulaire de contact
     initContactForm(photographer);
   }
 
-// Fonction pour afficher les informations du photographe
 function displayPhotographerInfo(photographer) {
   const headerSection = document.querySelector(".photograph-header");
 
-  // Utilisation du template du photographe
   const photographerModel = photographerTemplate(photographer);
 
   // Création du profil du photographe
@@ -196,7 +184,6 @@ function displayPhotographerInfo(photographer) {
   headerSection.appendChild(imgContainer);
 }
 
-// Fonction pour afficher les médias du photographe
 function displayPhotographerMedia(photographerMedia, photographerName) {
   const main = document.getElementById("main");
 
@@ -242,7 +229,6 @@ function displayPhotographerMedia(photographerMedia, photographerName) {
   const mediaGallery = document.createElement("div");
   mediaGallery.classList.add("media-gallery");
 
-  // Fonction pour trier les médias
   function sortMedia(media, sortType) {
     const mediaCopy = [...media];
 
@@ -258,8 +244,6 @@ function displayPhotographerMedia(photographerMedia, photographerName) {
     }
   }
 
-  // Fonction pour mettre à jour l'affichage des médias
-  // Fonction pour mettre à jour l'affichage des médias
   function updateMediaDisplay(sortType) {
     // Vider la galerie actuelle
     mediaGallery.innerHTML = "";
@@ -292,7 +276,6 @@ function displayPhotographerMedia(photographerMedia, photographerName) {
     createLightboxModal();
   }
 
-  // Fonction pour créer la structure de la modal
   function createLightboxModal() {
     // Vérifier si la modal existe déjà
     if (document.getElementById("lightbox-modal")) {
@@ -379,7 +362,6 @@ function displayPhotographerMedia(photographerMedia, photographerName) {
   let currentMedias = [];
   let currentIndex = 0;
 
-  // Fonction pour ouvrir la modal
   function openModal(medias, index) {
     currentMedias = medias;
     currentIndex = index;
@@ -405,7 +387,6 @@ function displayPhotographerMedia(photographerMedia, photographerName) {
     });
   }
 
-  // Fonction pour fermer la modal
   function closeModal() {
     const modal = document.getElementById("lightbox-modal");
     modal.setAttribute("aria-hidden", "true");
@@ -429,20 +410,17 @@ function displayPhotographerMedia(photographerMedia, photographerName) {
     }
   }
 
-  // Fonction pour afficher l'image suivante
   function showNextImage() {
     currentIndex = (currentIndex + 1) % currentMedias.length;
     updateModalContent();
   }
 
-  // Fonction pour afficher l'image précédente
   function showPreviousImage() {
     currentIndex =
       (currentIndex - 1 + currentMedias.length) % currentMedias.length;
     updateModalContent();
   }
 
-  // Fonction pour mettre à jour le contenu de la modal
   function updateModalContent() {
     const media = currentMedias[currentIndex];
     const mediaContainer = document.querySelector(".lightbox-media-container");
@@ -477,7 +455,6 @@ function displayPhotographerMedia(photographerMedia, photographerName) {
     title.textContent = media.title;
   }
 
-  // Fonction pour gérer les événements clavier
   function handleKeyDown(e) {
     const modal = document.getElementById("lightbox-modal");
     if (
@@ -501,8 +478,6 @@ function displayPhotographerMedia(photographerMedia, photographerName) {
   }
 
   // Écouter les changements du sélecteur
-
-  // Écouter les changements du sélecteur
   sortSelect.addEventListener("change", (e) => {
     updateMediaDisplay(e.target.value);
   });
@@ -514,7 +489,6 @@ function displayPhotographerMedia(photographerMedia, photographerName) {
   main.appendChild(mediaSection);
 }
 
-// Fonction pour afficher le tarif journalier du photographe et le nombre total de likes
 function displayPhotographerPrice(price) {
   const main = document.getElementById("main");
 
@@ -546,7 +520,6 @@ function displayPhotographerPrice(price) {
   main.appendChild(priceContainer);
 }
 
-// Fonction pour calculer le nombre total de likes
 function calculateTotalLikes() {
   const likesElements = document.querySelectorAll(".likes-count");
   let totalLikes = 0;
@@ -561,7 +534,6 @@ function calculateTotalLikes() {
 // Variables globales
 let currentPhotographer = null;
 
-// Fonction pour afficher la modal avec le nom du photographe
 function displayModal() {
     const modal = document.getElementById("contact_modal");
     const contactTitle = document.getElementById("contact-title");
@@ -590,7 +562,6 @@ function displayModal() {
     });
 }
 
-// Fonction pour fermer la modal
 function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
@@ -610,7 +581,6 @@ function closeModal() {
     document.querySelector('.contact_button').focus();
 }
 
-// Fonction pour initialiser le formulaire de contact
 function initContactForm(photographer) {
     // Stocker le photographe actuel dans la variable globale
     currentPhotographer = photographer;
