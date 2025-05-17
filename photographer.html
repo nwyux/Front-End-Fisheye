@@ -24,7 +24,6 @@
       <div class="photograph-header">
         <button
           class="contact_button"
-          onclick="displayModal()"
           tabindex="3"
           aria-label="Contact me"
         >
@@ -36,8 +35,7 @@
       <div class="modal">
         <header>
           <h2 id="contact-title">Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer le formulaire" tabindex="0" />
-        </header>
+          <img src="assets/icons/close.svg" alt="Fermer le formulaire" tabindex="0" />        </header>
         <form id="contact-form">
           <div class="form-group">
             <label for="firstname">Prénom</label>
@@ -59,8 +57,8 @@
         </form>
       </div>
     </div>
-    <script src="scripts/templates/photographer.js"></script>
-    <script src="scripts/pages/photographer.js"></script>
-    <script src="scripts/utils/contactForm.js"></script>
+    <script type="module" src="scripts/templates/photographer.js"></script>
+    <script type="module" src="scripts/pages/photographer.js"></script>
+    <script type="module" src="scripts/utils/contactForm.js"></script>
   </body>
 </html>

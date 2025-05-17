@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "lint": "eslint . --ext .js,.ts",
+    "lint:fix": "eslint . --ext .js,.ts --fix"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.27.0",
+    "eslint": "^9.27.0",
+    "globals": "^16.1.0"
+  }
+}
