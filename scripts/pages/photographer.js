@@ -64,6 +64,21 @@ function mediaFactory(data, photographerName) {
 
     const heartIcon = document.createElement("i");
     heartIcon.classList.add("fas", "fa-heart");
+    heartIcon.setAttribute("aria-label", "Bouton J'aime");
+    heartIcon.setAttribute("tabindex", "0");
+    heartIcon.setAttribute("role", "button");
+
+    // Ajout de l'événement de like sur le coeur
+    heartIcon.addEventListener("click", function() {
+      incrementLike(likesCount);
+    });
+
+    // Gestion de l'accessibilité clavier pour les likes
+    heartIcon.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        incrementLike(likesCount);
+      }
+    });
 
     likesContainer.appendChild(likesCount);
     likesContainer.appendChild(heartIcon);
@@ -78,6 +93,51 @@ function mediaFactory(data, photographerName) {
   }
 
   return { getMediaCardDOM };
+}
+
+function incrementLike(likesElement) {
+  // Vérifier si l'élément a déjà été liké (attribut data-liked)
+  const isLiked = likesElement.getAttribute("data-liked") === "true";
+  
+  if (!isLiked) {
+    // Incrémenter le nombre de likes
+    let currentLikes = parseInt(likesElement.textContent);
+    currentLikes++;
+    likesElement.textContent = currentLikes;
+    
+    // Marquer comme liké pour éviter les likes multiples
+    likesElement.setAttribute("data-liked", "true");
+    
+    // Mettre à jour le compteur global de likes
+    updateTotalLikes(1);
+  } else {
+    // Si déjà liké, on retire le like
+    let currentLikes = parseInt(likesElement.textContent);
+    currentLikes--;
+    likesElement.textContent = currentLikes;
+    
+    // Marquer comme non liké
+    likesElement.setAttribute("data-liked", "false");
+    
+    // Mettre à jour le compteur global de likes
+    updateTotalLikes(-1);
+  }
+}
+
+function updateTotalLikes(increment) {
+  const totalLikesElement = document.querySelector(".total-likes");
+  
+  if (totalLikesElement) {
+    // Extraire le nombre actuel (en ignorant l'icône coeur)
+    const currentText = totalLikesElement.textContent;
+    const currentTotal = parseInt(currentText);
+    
+    // Mettre à jour le total
+    const newTotal = currentTotal + increment;
+    
+    // Mettre à jour l'affichage
+    totalLikesElement.innerHTML = `${newTotal} <i class="fas fa-heart"></i>`;
+  }
 }
 
 async function fetchData() {
