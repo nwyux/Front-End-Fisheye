@@ -1,18 +1,15 @@
-// Variable globale pour stocker le photographe actuel
 let currentPhotographer = null;
 
 export function displayModal() {
     const modal = document.getElementById("contact_modal");
     const contactTitle = document.getElementById("contact-title");
     
-    // Mettre à jour le titre avec le nom du photographe sur deux lignes
     if (currentPhotographer) {
         contactTitle.textContent = `Contactez-moi ${currentPhotographer.name}`;
     } else {
         contactTitle.textContent = 'Contactez-moi';
     }
     
-    // Afficher la modal
     modal.style.display = "flex";
     
     // Accessibilité - focus sur le premier champ
@@ -49,22 +46,18 @@ export function closeModal() {
 }
 
 export function initContactForm(photographer) {
-    // Stocker le photographe actuel dans la variable globale
     currentPhotographer = photographer;
     
-    // Mettre à jour immédiatement le titre de la modal
     const contactTitle = document.getElementById("contact-title");
     if (contactTitle) {
         contactTitle.textContent = `Contactez-moi ${photographer.name}`;
     }
     
-    // Attacher l'événement au bouton de contact
     const contactButton = document.querySelector('.contact_button');
     if (contactButton) {
         contactButton.addEventListener('click', displayModal);
     }
     
-    // Attacher l'événement au bouton de fermeture de la modal
     const closeButton = document.querySelector('.modal header img');
     if (closeButton) {
         closeButton.addEventListener('click', closeModal);
@@ -85,11 +78,9 @@ export function initContactForm(photographer) {
             message: document.getElementById("message").value
         };
         
-        // Affichage des données dans la console
         console.log("Données du formulaire:", formData);
         console.log(`Message envoyé à ${currentPhotographer.name}`);
         
-        // Réinitialisation et fermeture du formulaire
         contactForm.reset();
         closeModal();
     });

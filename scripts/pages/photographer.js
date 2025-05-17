@@ -26,7 +26,6 @@ function mediaFactory(data, photographerName) {
     article.classList.add("media-card");
     article.setAttribute("aria-label", title);
 
-    // Conteneur du média
     const mediaContainer = document.createElement("div");
     mediaContainer.classList.add("media-container");
 
@@ -36,7 +35,7 @@ function mediaFactory(data, photographerName) {
       img.setAttribute("src", mediaPath);
       img.setAttribute("alt", title);
       img.setAttribute("class", "media-content");
-      img.setAttribute("tabindex", "0"); // Média sélectionnable en premier
+      img.setAttribute("tabindex", "0");
       mediaContainer.appendChild(img);
     } else if (type === "video") {
       const video = document.createElement("video");
@@ -44,18 +43,17 @@ function mediaFactory(data, photographerName) {
       video.setAttribute("alt", title);
       video.setAttribute("class", "media-content");
       video.setAttribute("controls", true);
-      video.setAttribute("tabindex", "0"); // Média sélectionnable en premier
+      video.setAttribute("tabindex", "0");
       mediaContainer.appendChild(video);
     }
 
-    // Informations sur le média
     const infoContainer = document.createElement("div");
     infoContainer.classList.add("media-info");
 
     const titleElem = document.createElement("h3");
     titleElem.textContent = title;
     titleElem.classList.add("media-title");
-    titleElem.setAttribute("tabindex", "0"); // Le titre est le deuxième élément à sélectionner
+    titleElem.setAttribute("tabindex", "0"); 
 
     const likesContainer = document.createElement("div");
     likesContainer.classList.add("likes-container");
@@ -63,7 +61,7 @@ function mediaFactory(data, photographerName) {
     const likesCount = document.createElement("span");
     likesCount.textContent = likes;
     likesCount.classList.add("likes-count");
-    likesCount.setAttribute("tabindex", "0"); // Le nombre de likes est le troisième élément
+    likesCount.setAttribute("tabindex", "0");
 
     const heartIcon = document.createElement("i");
     heartIcon.classList.add("fas", "fa-heart");
@@ -99,7 +97,6 @@ function mediaFactory(data, photographerName) {
 }
 
 function incrementLike(likesElement) {
-  // Vérifier si l'élément a déjà été liké (attribut data-liked)
   const isLiked = likesElement.getAttribute("data-liked") === "true";
   
   if (!isLiked) {
@@ -108,10 +105,8 @@ function incrementLike(likesElement) {
     currentLikes++;
     likesElement.textContent = currentLikes;
     
-    // Marquer comme liké pour éviter les likes multiples
     likesElement.setAttribute("data-liked", "true");
     
-    // Mettre à jour le compteur global de likes
     updateTotalLikes(1);
   } else {
     // Si déjà liké, on retire le like
@@ -119,10 +114,8 @@ function incrementLike(likesElement) {
     currentLikes--;
     likesElement.textContent = currentLikes;
     
-    // Marquer comme non liké
     likesElement.setAttribute("data-liked", "false");
     
-    // Mettre à jour le compteur global de likes
     updateTotalLikes(-1);
   }
 }
@@ -135,10 +128,8 @@ function updateTotalLikes(increment) {
     const currentText = totalLikesElement.textContent;
     const currentTotal = parseInt(currentText);
     
-    // Mettre à jour le total
     const newTotal = currentTotal + increment;
     
-    // Mettre à jour l'affichage
     totalLikesElement.innerHTML = `${newTotal} <i class="fas fa-heart"></i>`;
   }
 }
@@ -184,7 +175,6 @@ function displayPhotographerInfo(photographer) {
 
   const photographerModel = photographerTemplate(photographer);
 
-  // Création du profil du photographe
   const profileSection = document.createElement("div");
   profileSection.classList.add("photographer-profile");
 
@@ -192,7 +182,6 @@ function displayPhotographerInfo(photographer) {
   nameElem.textContent = photographer.name;
   nameElem.setAttribute("tabindex", "1");
 
-  // Création d'un conteneur pour regrouper h2 et p
   const infoGroup = document.createElement("div");
   infoGroup.classList.add("photographer-info-group");
   infoGroup.setAttribute("tabindex", "2");
@@ -209,15 +198,12 @@ function displayPhotographerInfo(photographer) {
   taglineElem.textContent = photographer.tagline;
   taglineElem.classList.add("photographer-tagline");
 
-  // Ajout des éléments de texte au groupe d'info
   infoGroup.appendChild(locationElem);
   infoGroup.appendChild(taglineElem);
 
-  // Structure du profil: nom puis groupe d'informations
   profileSection.appendChild(nameElem);
   profileSection.appendChild(infoGroup);
 
-  // Création du conteneur pour le bouton de contact
   const contactButtonContainer = document.createElement("div");
   contactButtonContainer.classList.add("contact-button-container");
 
@@ -225,7 +211,6 @@ function displayPhotographerInfo(photographer) {
   const contactButton = headerSection.querySelector(".contact_button");
   contactButtonContainer.appendChild(contactButton);
 
-  // Ajout de la photo du photographe
   const imgContainer = document.createElement("div");
   imgContainer.classList.add("photographer-portrait");
 
@@ -241,7 +226,6 @@ function displayPhotographerInfo(photographer) {
     headerSection.removeChild(headerSection.firstChild);
   }
 
-  // Insertion des éléments dans la section header
   headerSection.appendChild(profileSection);
   headerSection.appendChild(contactButtonContainer);
   headerSection.appendChild(imgContainer);
@@ -250,7 +234,6 @@ function displayPhotographerInfo(photographer) {
 function displayPhotographerMedia(photographerMedia, photographerName) {
   const main = document.getElementById("main");
 
-  // Création du sélecteur de tri
   const sortContainer = document.createElement("div");
   sortContainer.classList.add("sort-container");
   sortContainer.setAttribute("aria-label", "Options de tri");
@@ -284,11 +267,9 @@ function displayPhotographerMedia(photographerMedia, photographerName) {
   sortContainer.appendChild(sortSelect);
   main.appendChild(sortContainer);
 
-  // Création de la section des médias
   const mediaSection = document.createElement("section");
   mediaSection.classList.add("photographer-media");
 
-  // Création de la galerie de médias
   const mediaGallery = document.createElement("div");
   mediaGallery.classList.add("media-gallery");
 
@@ -311,15 +292,12 @@ function displayPhotographerMedia(photographerMedia, photographerName) {
     // Vider la galerie actuelle
     mediaGallery.innerHTML = "";
 
-    // Trier les médias selon le critère sélectionné
     const sortedMedia = sortMedia(photographerMedia, sortType);
 
-    // Ajouter les médias triés à la galerie
     sortedMedia.forEach((media, index) => {
       const mediaModel = mediaFactory(media, photographerName);
       const mediaCard = mediaModel.getMediaCardDOM();
 
-      // Ajouter un événement click pour ouvrir la modal
       const mediaContent = mediaCard.querySelector(".media-content");
       mediaContent.addEventListener("click", () => {
         openModal(sortedMedia, index);
@@ -405,7 +383,6 @@ function displayPhotographerMedia(photographerMedia, photographerName) {
       }
     });
   
-    // Organisation des éléments
     mediaAndTitleContainer.appendChild(mediaContainer);
     mediaAndTitleContainer.appendChild(title);
   
@@ -492,13 +469,12 @@ function displayPhotographerMedia(photographerMedia, photographerName) {
     // Nettoyer le conteneur
     mediaContainer.innerHTML = "";
   
-    // Ajouter le média (image ou vidéo) avec taille réduite
+    // Ajouter le média (image ou vidéo)
     if (media.image) {
       const img = document.createElement("img");
       img.src = `assets/images/${photographerName}/${media.image}`;
       img.alt = media.title;
       img.classList.add("lightbox-media");
-      // Réduire la taille de 30%
       img.style.maxWidth = "70%"; 
       img.style.maxHeight = "70%";
       mediaContainer.appendChild(img);
@@ -508,13 +484,11 @@ function displayPhotographerMedia(photographerMedia, photographerName) {
       video.controls = true;
       video.autoplay = true;
       video.classList.add("lightbox-media");
-      // Réduire la taille de 30%
       video.style.maxWidth = "70%";
       video.style.maxHeight = "70%";
       mediaContainer.appendChild(video);
     }
   
-    // Mettre à jour le titre
     title.textContent = media.title;
   }
 
@@ -559,24 +533,19 @@ function displayPhotographerPrice(price) {
   priceContainer.classList.add("photographer-price-banner");
   priceContainer.setAttribute("tabindex", "5");
 
-  // Ajouter le nombre total de likes
   const totalLikes = calculateTotalLikes();
   const likesElem = document.createElement("span");
   likesElem.classList.add("total-likes");
   likesElem.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`;
 
-  // Ajouter un séparateur avec plus d'espace
   const separator = document.createElement("span");
   separator.classList.add("price-separator");
-  separator.textContent = "     "; // Plusieurs espaces pour un écart plus grand
-  // Ou utiliser une marge CSS
+  separator.textContent = "     ";
   separator.style.margin = "0 20px";
 
-  // Ajouter le prix
   const priceElem = document.createElement("span");
   priceElem.textContent = `${price}€ / jour`;
 
-  // Assembler les éléments
   priceContainer.appendChild(likesElem);
   priceContainer.appendChild(separator);
   priceContainer.appendChild(priceElem);

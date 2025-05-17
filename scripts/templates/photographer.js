@@ -3,8 +3,6 @@ export function photographerTemplate(data) {
 
     const picture = `assets/photographers/${portrait}`;
 
-    // Au lieu de tout mettre dans une fonction, tout separe pour que ce soit clean
-
     function getUserCardDOM() {
         const article = document.createElement('article');
         article.classList.add('photographer-card');
@@ -46,7 +44,6 @@ export function photographerTemplate(data) {
         span.textContent = `${price}€/jour`;
         span.classList.add('photographer-price');
         
-        // Ajout des éléments d'information au conteneur
         infoContainer.appendChild(h3);
         infoContainer.appendChild(p);
         infoContainer.appendChild(span);
@@ -56,7 +53,7 @@ export function photographerTemplate(data) {
         article.appendChild(link);
         link.appendChild(imgContainer);
         link.appendChild(h2);
-        article.appendChild(infoContainer); // Ajout du conteneur unique au lieu des éléments individuels
+        article.appendChild(infoContainer);
         
         return (article);
     }
