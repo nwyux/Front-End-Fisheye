@@ -100,13 +100,12 @@
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
-  appearance: none; /* Supprime l'apparence native du select */
+  appearance: none;
   position: relative;
   min-width: 150px;
   height: 50px;
 }
 
-/* Création de la flèche personnalisée */
 .sort-select {
   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
@@ -115,7 +114,6 @@
   padding-right: 35px;
 }
 
-/* Styles pour la galerie de médias */
 .media-gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -170,7 +168,6 @@
   cursor: pointer;
 }
 
-/* Barre de prix en bas de page */
 .photographer-price-banner {
   position: fixed;
   bottom: 0;
@@ -183,7 +180,6 @@
   box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Styles pour la modal de lightbox */
 .lightbox-modal {
   display: none;
   position: fixed;
@@ -204,15 +200,15 @@
   height: 90%;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centrage horizontal */
-  outline: none; /* Enlève le cadre de focus par défaut */
+  align-items: center;
+  outline: none;
 }
 
 .lightbox-close {
   position: absolute;
   top: 15px;
   right: 15px;
-  font-size: 35px; /* Légèrement agrandi */
+  font-size: 35px;
   color: #901c1c;
   background: none;
   border: none;
@@ -225,7 +221,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 35px; /* Légèrement agrandi */
+  font-size: 35px;
   color: #901c1c;
   background: none;
   border: none;
@@ -244,16 +240,16 @@
 
 .lightbox-media-container {
   display: flex;
-  justify-content: center; /* Centre horizontalement */
-  align-items: center; /* Centre verticalement */
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 90%; /* Réduction légère pour laisser de la place au titre */
+  height: 90%;
 }
 
 .lightbox-media {
-  width: 100%; /* Taille fixe à 70% de la largeur du conteneur */
-  height: 100%; /* Maintient le ratio */
-  object-fit: contain; /* Préserve le ratio sans déformation */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .lightbox-media-title-container {
@@ -268,9 +264,9 @@
   color: #901c1c;
   font-size: 20px;
   text-align: left;
-  margin-top: 20px; /* Plus d'espace entre le média et le titre */
+  margin-top: 20px;
   align-self: flex-start;
-  padding-left: 15%; /* Aligne le titre avec le bord gauche du média */
+  padding-left: 15%;
 }
 
 .modal {
@@ -290,7 +286,6 @@
   width: 100%;
 }
 
-/* Styles pour la modal de contact */
 #contact_modal {
   display: none;
   position: fixed;
