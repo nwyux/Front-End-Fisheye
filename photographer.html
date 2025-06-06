@@ -22,38 +22,59 @@
     </header>
     <main id="main">
       <div class="photograph-header">
-        <button
-          class="contact_button"
-          tabindex="3"
-          aria-label="Contact me"
-        >
+        <button class="contact_button" tabindex="3" aria-label="Contact me">
           Contactez-moi
         </button>
       </div>
     </main>
-    <div id="contact_modal">
+    <div id="contact_modal" tabindex="1">
       <div class="modal">
         <header>
-          <h2 id="contact-title">Contactez-moi</h2>
-          <img src="assets/icons/close.svg" alt="Fermer le formulaire" tabindex="0" />        </header>
+          <h2 id="contact-title" tabindex="2">Contactez-moi</h2>
+          <img
+            src="assets/icons/close.svg"
+            alt="Fermer le formulaire"
+            tabindex="12"
+          />
+        </header>
         <form id="contact-form">
           <div class="form-group">
-            <label for="firstname">Prénom</label>
-            <input type="text" id="firstname" name="firstname" required />
+            <label for="firstname" tabindex="3">Prénom</label>
+            <input
+              type="text"
+              id="firstname"
+              name="firstname"
+              required
+              tabindex="4"
+            />
           </div>
           <div class="form-group">
-            <label for="lastname">Nom</label>
-            <input type="text" id="lastname" name="lastname" required />
+            <label for="lastname" tabindex="5">Nom</label>
+            <input
+              type="text"
+              id="lastname"
+              name="lastname"
+              required
+              tabindex="6"
+            />
           </div>
           <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required />
+            <label for="email" tabindex="7">Email</label>
+            <input type="email" id="email" name="email" required tabindex="8" />
           </div>
           <div class="form-group">
-            <label for="message">Votre message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
+            <label for="message" tabindex="9">Votre message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              required
+              tabindex="10"
+            ></textarea>
           </div>
-          <button class="contact_button" type="submit">Envoyer</button>
+          <button class="contact_button" type="submit" tabindex="11">
+            Envoyer
+          </button>
         </form>
       </div>
     </div>
